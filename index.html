@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <section class="hero" id="hero">
+        <h1>Generate Strong Passwords Instantly</h1>
+        <p>Protect your accounts with passwords that are secure, random, and tailored to your needs.</p>
+        
+        
+        <div class="controls">
+            <label>
+                Password Length: <span id="length-value">12</span>
+            </label>
+            <input type="range" min="6" max="20" value="12" class="slider" id="password-length" oninput="updateLength()">
+        </div>
+            <div class="controls1">
+            <label>
+                <input type="checkbox" id="uppercase" checked> Include Uppercase Letters
+            </label>
+            <label>
+                <input type="checkbox" id="lowercase" checked> Include Lowercase Letters
+            </label>
+            <label>
+                <input type="checkbox" id="numbers" checked> Include Numbers
+            </label>
+            <label>
+                <input type="checkbox" id="symbols" checked> Include Symbols
+            </label>
+            <label>
+                <input type="checkbox" id="exclude-similar"> Exclude Similar Characters (e.g., O, 0, I, l)
+            </label>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="generatePassword()">Generate Password</button>
+            <button class="btn btn-secondary2" onclick="learnMore()">Learn More</button>
+        </div>
+        
+        <!-- Password Preview -->
+        <div class="password-preview">
+            <span class="password-box" id="password">*********</span>
+            <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+        </div>
+        <p class="strength" id="strength">Strength: Weak</p>
+        <p class="message" id="message"></p>
+
+        <!-- Password History -->
+        <div class="history">
+            <h3>Password History</h3>
+            <ul id="password-history"></ul>
+            <button class="btn btn-secondary" onclick="clearHistory()">Clear History</button>
+        </div>
+       
+        <button class="btn btn-secondary1" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    </section>
+
+
+
+
+   
+ 
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <h3 class="step-title tooltip" data-tooltip="Select your desired password length.">Choose Password Length</h3>
+          <p class="step-description">Use the slider to select a password length that fits your needs.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <h3 class="step-title tooltip" data-tooltip="Strength ensures better security.">Select Password Strength</h3>
+          <p class="step-description">Choose from weak, medium, or strong passwords based on your preferences.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <h3 class="step-title tooltip" data-tooltip="Easily copy your password.">Generate and Copy</h3>
+          <p class="step-description">Click the generate button and copy your password instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+
+
+  
+    <section class="features-section">
+        <h2>Why Choose Our Password Generator?</h2>
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Customizable Length</h3>
+                <p class="feature-description">Set your desired password length for enhanced security.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <h3 class="feature-title">Multiple Strength Levels</h3>
+                <p class="feature-description">Choose between weak, medium, and ultra-strong passwords.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">No Data Collection</h3>
+                <p class="feature-description">Your privacy matters – we don't store or collect any data.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Instant Generation</h3>
+                <p class="feature-description">Get your password with just one click, instantly.</p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔁</div>
+                <h3 class="feature-title">Unique Every Time</h3>
+                <p class="feature-description">Never reuse the same password – every click generates a new one.</p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3 class="feature-title">Special Character Inclusion</h3>
+                <p class="feature-description">Add special characters for stronger, more complex passwords.</p>
+            </div>
+        </div>
+    </section>
+
+
+  <section class="security-info">
+    <h2>How Secure Are Your Passwords?</h2>
+    <p>Passwords are your first line of defense in protecting sensitive information. Here are some tips to ensure your passwords are secure and strong:</p>
+
+    <div class="info-box">
+      <h3>Why Strong Passwords Matter</h3>
+      <p>A strong password reduces the risk of unauthorized access to your accounts.</p>
+      <button onclick="toggleContent('why-strong')">Read More</button>
+      <div class="hidden-content" id="why-strong">
+        <p>- Use at least 12 characters with a mix of uppercase, lowercase, numbers, and symbols.</p>
+        <p>- Avoid using common phrases, dictionary words, or personal details.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>Tips to Store Passwords Safely</h3>
+      <p>Storing your passwords securely is as important as creating them.</p>
+      <button onclick="toggleContent('store-safely')">Read More</button>
+      <div class="hidden-content" id="store-safely">
+        <p>- Use a reliable password manager to store and manage passwords securely.</p>
+        <p>- Avoid writing down passwords or storing them in plain text.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>How to Avoid Phishing Attacks</h3>
+      <p>Even strong passwords can be stolen through phishing. Stay vigilant!</p>
+      <button onclick="toggleContent('phishing')">Read More</button>
+      <div class="hidden-content" id="phishing">
+        <p>- Do not click on suspicious links in emails or messages.</p>
+        <p>- Verify the authenticity of websites before entering credentials.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SecurePass. ABOOBACKER SHARFUDHEEN. | <a href="#">Privacy Policy</a></p>
+  </footer>
+
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="carousel">
+      <div class="testimonial-container">
+        <div class="testimonial">
+          <p>"This password generator is a game-changer! I feel so much more secure online now."
+          </p>
+          <div class="author">- John Doe</div>
+          <div class="rating">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <p>"Easy to use, highly customizable, and completely reliable. Highly recommend!"
+          </p>
+          <div class="author">- Jane Smith</div>
+          <div class="rating">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <p>"Great tool! I love how it creates complex passwords effortlessly."
+          </p>
+          <div class="author">- Alex Brown</div>
+          <div class="rating">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prev">&#10094; Prev</button>
+      <button id="next">Next &#10095;</button>
+    </div>
+  </section>
+ 
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">
+        <h3>What makes a good password?</h3>
+        <span class="faq-icon">&#x25BC;</span>
+      </div>
+      <div class="faq-answer">
+        <p>A good password is long, includes a mix of uppercase and lowercase letters, numbers, and special characters. Avoid using common words or easily guessed information.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <h3>How do I know my password is strong enough?</h3>
+        <span class="faq-icon">&#x25BC;</span>
+      </div>
+      <div class="faq-answer">
+        <p>You can use password strength checkers or tools provided by our site to determine the strength of your password based on its complexity and length.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <h3>Can I use these passwords for multiple accounts?</h3>
+        <span class="faq-icon">&#x25BC;</span>
+      </div>
+      <div class="faq-answer">
+        <p>It is not recommended to reuse passwords across multiple accounts. Using unique passwords for each account enhances security.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <h3>How can I store my passwords safely?</h3>
+        <span class="faq-icon">&#x25BC;</span>
+      </div>
+      <div class="faq-answer">
+        <p>Consider using a trusted password manager to securely store and manage your passwords. Avoid writing them down or saving them in unsecured files.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Quick Links Section -->
+     
+
+      <!-- Newsletter Section -->
+      <div class="footer-section newsletter">
+        <h3>Subscribe to our Newsletter</h3>
+        <p>Get the latest updates and password tips delivered to your inbox.</p>
+        <input type="email" id="newsletterEmail" placeholder="Enter your email">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://github.com/abus2" target="_blank"><ion-icon name="logo-github"></ion-icon> GitHub</a>
+          <a href="https://www.instagram.com/a_b_u_s?igsh=cDg2MTAzZTFwczFo" target="_blank"><ion-icon name="logo-instagram"></ion-icon> Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61555336857143" target="_blank"><ion-icon name="logo-facebook"></ion-icon> Facebook</a>
+         
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+      &copy; 2025 Password Generator. ABOOBACKER SHARFUDHEEN
+    </div>
+  </footer>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+   <script src="script.js"></script>
+</body>
+</html>
